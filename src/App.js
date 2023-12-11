@@ -38,19 +38,7 @@ const LazyProductReviews = React.lazy(() =>
 );
 
 function App() {
-  const [stripeApiKey, setStripeApiKey] = useState("");
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const stripeApiKey = sessionStorage.getItem("stripeApiKey");
-    if (stripeApiKey) {
-      setStripeApiKey(stripeApiKey);
-    } else {
-      getStripeApiKey();
-    }
-
-  }, []);
+  const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(load_UserProfile());
@@ -298,9 +286,9 @@ function App() {
               exact
               path="/admin/users"
               component={LazyUserList}
-            />           
+            />
           </Switch>
-        </Suspense>     
+        </Suspense>
       </Router>
     </>
   );
