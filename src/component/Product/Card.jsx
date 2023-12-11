@@ -2,8 +2,6 @@ import React, { useState  } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Rating from "@material-ui/lab/Rating";
 import Typography from "@material-ui/core/Typography";
-import ThumbUpIcon from "@material-ui/icons/ThumbUp";
-import ThumbDownIcon from "@material-ui/icons/ThumbDown";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
