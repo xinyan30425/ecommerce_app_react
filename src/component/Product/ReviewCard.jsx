@@ -23,24 +23,6 @@ const ReviewCard = ({ product }) => {
   };
 
 
-  // const sortedData = yourData.sort((a, b) => {
-  //   switch (sortValue) {
-  //     case "highest":
-  //       return b.rating - a.rating;
-  //     case "lowest":
-  //       return a.rating - b.rating;
-  //     case "latest":
-  //       return new Date(b.date) - new Date(a.date);
-  //     case "oldest":
-  //       return new Date(a.date) - new Date(b.date);
-  //     default:
-  //       return 0;
-  //   }
-  // });
-
-
-
-
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {

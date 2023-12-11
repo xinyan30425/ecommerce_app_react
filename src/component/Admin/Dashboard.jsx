@@ -9,8 +9,7 @@ import { getAdminProducts, clearErrors } from "../../actions/productAction";
 import MetaData from "../layouts/MataData/MataData";
 import Loader from "../layouts/loader/Loader";
 import { useAlert } from "react-alert";
-import { getAllOrders } from "../../actions/orderAction";
-import { getAllUsers } from "../../actions/userAction";
+
 import Navbar from "./Navbar";
 import Sidebar from "./Siderbar";
 import { useHistory } from "react-router-dom";
@@ -259,9 +258,7 @@ function Dashboard() {
   const dispatch = useDispatch();
   const [toggle, setToggle] = useState(false);
   const { products, loading, error } = useSelector((state) => state.products);
-  const { orders, error: ordersError } = useSelector(
-    (state) => state.allOrders
-  );
+
   const { users, error: usersError } = useSelector((state) => state.allUsers);
 
   const alert = useAlert();
@@ -275,24 +272,6 @@ function Dashboard() {
       }
     });
 
-  useEffect(() => {
-    if (error) {
-      alert.error(error);
-      dispatch(clearErrors);
-    }
-    if (usersError) {
-      alert.error(usersError);
-      dispatch(clearErrors);
-    }
-    if (ordersError) {
-      alert.error(ordersError);
-      dispatch(clearErrors);
-    }
-    
-    dispatch(getAllOrders());
-    dispatch(getAllUsers());
-    dispatch(getAdminProducts());
-  }, [dispatch, error, alert, ordersError, usersError]);
 
   // togle handler =>
   const toggleHandler = () => {
@@ -300,56 +279,6 @@ function Dashboard() {
     setToggle(!toggle);
   };
 
-  // total Amount Earned
-  let totalAmount = 0;
-  orders &&
-    orders.forEach((item) => {
-      totalAmount += item.totalPrice;
-    });
-
-  const lineOptions = {
-    chart: {
-      type: "line",
-      style: {
-        fontFamily: "Roboto",
-        fontWeight: "900",
-      },
-    },
-    xAxis: {
-      categories: ["Initial Amount", "Amount Earned"],
-      labels: {
-        style: {
-          fontWeight: "900",
-        },
-      },
-    },
-    yAxis: {
-      title: {
-        text: null,
-      },
-      labels: {
-        style: {
-          fontWeight: "900",
-        },
-      },
-    },
-    series: [
-      {
-        name: "TOTAL AMOUNT",
-        data: [0, totalAmount],
-      },
-    ],
-    plotOptions: {
-      line: {
-        lineWidth: 4,
-        marker: {
-          enabled: true,
-        },
-        color: "black",
-      },
-    },
-  };
-  // now set the Value of stock of the product for Doughnut component in  chart .
 
   // to close the sidebar when the screen size is greater than 1000px
   useEffect(() => {
@@ -408,7 +337,6 @@ function Dashboard() {
                         boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.25)",
                       }}
                     />
-
                     <Typography variant="h6" className={classes.heading}>
                       Total Products
                     </Typography>
@@ -419,71 +347,9 @@ function Dashboard() {
                     </Typography>
                   </div>
                 </div>
-
-                <div
-                  className={classes.cardContainer}
-                  style={{
-                    backgroundSize: "cover",
-                    transition: "transform 0.2s ease-in-out",
-                    cursor: "pointer",
-                    ":hover": {
-                      transform: "scale(1.1)",
-                    },
-                  }}
-                  onClick={() => history.push("/admin/orders")}
-                >
-                  <div className={classes.headerConetnt}>
-                    <AssignmentInd
-                      fontSize="large"
-                      style={{
-                        fontSize: "3rem",
-                        boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
-                      }}
-                    />
-                    <Typography variant="h6" className={classes.heading}>
-                      Total Orders
-                    </Typography>
-                  </div>
-                  <div className={classes.textContainer}>
-                    <Typography variant="body2" className={classes.number}>
-                      {orders && orders.length}
-                    </Typography>
-                  </div>
-                </div>
-
-                <div
-                  className={classes.cardContainer}
-                  style={{
-                    backgroundSize: "cover",
-                    transition: "transform 0.2s ease-in-out",
-                    cursor: "pointer",
-                    ":hover": {
-                      transform: "scale(1.1)",
-                    },
-                  }}
-                  onClick={() => history.push("/admin/users")}
-                >
-                  <div className={classes.headerConetnt}>
-                    <People
-                      fontSize="large"
-                      style={{
-                        fontSize: "3rem",
-                        boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
-                      }}
-                    />
-                    <Typography variant="h6" className={classes.heading}>
-                      Total Users
-                    </Typography>
-                  </div>
-                  <div className={classes.textContainer}>
-                    <Typography variant="body2" className={classes.number}>
-                      {users && users.length}
-                    </Typography>
-                  </div>
                 </div>
               </div>
             </div>
-          </div>
         </>
       )}
     </>

@@ -68,7 +68,6 @@ function UpdateProfile() {
   };
 
   useEffect(() => {
-    // let say if user not update name and change other data then we setting all data from prv user data initaily for name , email, avatar
 
     if (user) {
       // console.log(user, "user");
@@ -81,7 +80,6 @@ function UpdateProfile() {
       alert.error(error);
       dispatch(clearErrors());
     }
-    // isUpadted is nothing But success message from response. once user updated then pop the message and show profile data
     if (isUpdated) {
       alert.success("Profile Updated Successfully");
       // now get user New data from backend
@@ -89,7 +87,6 @@ function UpdateProfile() {
         type: UPDATE_PROFILE_RESET,
       });
 
-      // now reset all value . eg : isUpdate : false and all
       dispatch({
         type: UPDATE_PROFILE_RESET,
       });

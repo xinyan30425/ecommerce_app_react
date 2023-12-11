@@ -66,12 +66,11 @@ function OrderList() {
     dispatch(getAllOrders());
   }, [dispatch, error, alert , isDeleted , deleteError]);
 
-  // delet order handler
+  // delete order handler
   const deleteOrderHandler = (id) => {
     dispatch(deleteOrder(id))
   };
 
-  // DATA GRID VALUE
 const columns = [
   {
     field: "id",
@@ -130,9 +129,6 @@ const columns = [
     },
   },
 ];
-
-
- 
 
   const rows =[];
   orders && orders.forEach(item =>{
