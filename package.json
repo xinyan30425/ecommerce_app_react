@@ -37,8 +37,11 @@
     "swiper": "^8.4.7",
     "web-vitals": "^3.4.0"
   },
+  "engines": {
+    "node": ">=14.0.0"
+  },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts --openssl-legacy-provider start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
