@@ -261,6 +261,7 @@ function NewProduct() {
                         value={category}
                         onChange={handleCategoryChange}
                         className={classes.select}
+                        required
                         inputProps={{
                           name: "category",
                           id: "category-select",
@@ -299,6 +300,7 @@ function NewProduct() {
                     className={classes.descriptionInput}
                     label="Product Description"
                     multiline
+                    required
                     rows={1}
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
@@ -326,6 +328,7 @@ function NewProduct() {
                       name="avatar"
                       className={classes.input}
                       accept="image/*"
+                      // required
                       onChange={createProductImagesChange}
                       multiple
                       style={{ display: "none" }}

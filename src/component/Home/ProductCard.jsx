@@ -92,27 +92,32 @@ const ProductCard = ({ product }) => {
   const creatHandler = async () => {
     const myForm = new FormData();
     myForm.set("name", product.name);
-    myForm.set("price", product.price);
+    myForm.set("price", product.price === "?" ? 0 : product.price);
     myForm.set("description", product.description);
+    myForm.set("category", "Computer Science");
+    myForm.set("Stock", 0);
+    myForm.set("info", 'ok');
     product.images.forEach((currImg) => {
       myForm.append("images", currImg.url);
     });
 
-    const data = await dispatch(createProduct(myForm));
-    console.log(data)
-    return data;
+    const response = await dispatch(createProduct(myForm));
+    return response;
   }
 
   return (
     <Card className={classes.root}>
       <Button
         className="productCard"
-        onClick={() => {
+        onClick={async () => {
           if (pathname.includes('search')) {
-            const data = creatHandler();
-            console.log(data)
+            const response = await creatHandler();
+            console.log(response)
+
+            history.push(`/product/${response.data._id}`)
+          } else {
+            history.push(`/product/${product._id}`);
           }
-          history.push(`/product/${product._id}`)
         }}
         to={`/product/${product._id}`}
         style={{ textDecoration: "none", color: "inherit" }}
